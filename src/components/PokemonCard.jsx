@@ -1,8 +1,11 @@
-const PokemonCard = () => {
+const PokemonCard = ({ pokemon }) => {
     return (
-        <>
-            <h1>포켓몬 카드</h1>
-        </>
+        <div>
+            <img src={pokemon.img_url}/>
+            <h3>{pokemon.korean_name}</h3>
+            <p>{pokemon.types.join(", ")}</p>
+            <button>추가</button>
+        </div>
     )
 }
 

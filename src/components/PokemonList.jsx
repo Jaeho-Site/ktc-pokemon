@@ -1,10 +1,9 @@
-import  MOCK_DATA  from "../db/mock";
 import  PokemonCard  from "./PokemonCard";
 
-const PokemonList = () => {
+const PokemonList = ({ pokemons }) => {
     return (
         <>
-            {MOCK_DATA.map((pokemon) => (
+            {pokemons.map((pokemon) => (
                 <PokemonCard key={pokemon.id} pokemon={pokemon} />
             ))}
         </>
