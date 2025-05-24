@@ -21,13 +21,24 @@ export default PokemonList;
 const List = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 0.75rem;
     max-width: 1040px;
     width: 100%;
     margin: 0 auto;
     border: 2px solid;
     border-radius: 12px;
-    padding: 16px;
+    padding: 1rem;
     box-sizing: border-box;
     justify-content: flex-start;
+
+    @media (max-width: 768px) {
+        gap: 0.5rem;
+        padding: 0.75rem;
+        justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+        gap: 0.25rem;
+        padding: 0.5rem;
+    }
 `;

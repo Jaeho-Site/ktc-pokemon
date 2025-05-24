@@ -23,26 +23,78 @@ const PokemonCard = ({ pokemon, addPokemon, removePokemon, isInDashboard }) => {
 export default PokemonCard;
 
 const Card = styled.div`
-    width: 120px;
-    margin: 8px;
+    width: 7.5rem;
+    margin: 0.5rem;
     text-align: center;
     border: 1.5px solid;
     border-radius: 8px;
-    padding: 8px;
+    padding: 0.5rem;
+
     h4 {
-        font-size: 12px;
+        font-size: 0.75rem;
         font-weight: 600;
+        margin: 0.25rem 0;
     }
+
     p {
-        font-size: 10px;
+        font-size: 0.625rem;
         color: #666;
+        margin: 0.125rem 0;
     }
+
     button {
-        font-size: 12px;
-        padding: 2px 6px;
-        margin-top: 4px;
+        font-size: 0.6rem;
+        padding: 0.125rem 0.375rem;
+        margin-top: 0.25rem;
+        border: 1px solid #ddd;
         border-radius: 4px;
         cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        width: 6rem;
+        margin: 0.25rem;
+        padding: 0.375rem;
+
+        img {
+            max-width: 60px;
+        }
+
+        h4 {
+            font-size: 0.625rem;
+        }
+
+        p {
+            font-size: 0.5rem;
+        }
+
+        button {
+            font-size: 0.5rem;
+            padding: 0.1rem 0.25rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        width: 5rem;
+        margin: 0.125rem;
+        padding: 0.25rem;
+
+        img {
+            max-width: 50px;
+        }
+
+        h4 {
+            font-size: 0.5rem;
+        }
+
+        p {
+            font-size: 0.425rem;
+        }
+
+        button {
+            font-size: 0.425rem;
+            padding: 0.05rem 0.2rem;
+        }
     }
 `;
 
