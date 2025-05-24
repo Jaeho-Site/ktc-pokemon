@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 
-const List = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    max-width: 1040px;
-    margin: 0 auto;
-`;
-
 const PokemonList = ({ pokemons, addPokemon }) => {
     return (
         <List>
@@ -25,3 +17,17 @@ const PokemonList = ({ pokemons, addPokemon }) => {
 };
 
 export default PokemonList;
+
+const List = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 1040px;
+    width: 100%;
+    margin: 0 auto;
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 16px;
+    box-sizing: border-box;
+    justify-content: flex-start;
+`;
