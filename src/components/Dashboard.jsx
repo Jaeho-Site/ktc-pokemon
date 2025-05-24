@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import Pokeball from "../assets/pokeball.png";
 import PokemonCard from "./PokemonCard";
 import styled from "styled-components";
+import { usePokemon } from "../contexts/PokemonContext";
 
-const Dashboard = ({ selected, removePokemon }) => {
+const Dashboard = () => {
     const navigate = useNavigate();
+    const { selected } = usePokemon();
     const slots = Array.from({ length: 6 }, (_, index) => selected[index] || null);
 
     return (
@@ -18,7 +20,6 @@ const Dashboard = ({ selected, removePokemon }) => {
                             <PokemonCard
                                 key={pokemon.id}
                                 pokemon={pokemon}
-                                removePokemon={removePokemon}
                                 isInDashboard={true}
                             />
                         ) : (

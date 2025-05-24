@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { usePokemon } from "../contexts/PokemonContext";
 
-const PokemonCard = ({ pokemon, addPokemon, removePokemon, isInDashboard }) => {
+const PokemonCard = ({ pokemon, isInDashboard }) => {
     const navigate = useNavigate();
+    const { addPokemon, removePokemon } = usePokemon();
+    
     const handleCardClick = () => {
         navigate(`/detail?id=${pokemon.id}`);
     };
+    
     return (
         <Card onClick={handleCardClick} style={{ cursor: 'pointer' }}>
             <img src={pokemon.img_url} alt={pokemon.korean_name} />

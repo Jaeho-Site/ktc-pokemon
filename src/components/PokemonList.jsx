@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import PokemonCard from "./PokemonCard";
 
-const PokemonList = ({ pokemons, addPokemon }) => {
+const PokemonList = ({ pokemons }) => {
     return (
         <List>
             {pokemons.map((pokemon) => (
                 <PokemonCard
                     key={pokemon.id}
                     pokemon={pokemon}
-                    addPokemon={addPokemon}
                     isInDashboard={false}
                 />
             ))}
