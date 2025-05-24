@@ -64,10 +64,12 @@ const PokemonGrid = styled.div`
     max-width: 100%;
 
     @media (max-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
         gap: 0.75rem;
     }
 
     @media (max-width: 480px) {
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
     }
 `;
@@ -97,7 +99,7 @@ const SlotContainer = styled.div`
         min-height: 8rem;
         
         img {
-            max-width: 50px;
+            max-width: 60px;
         }
     }
 `;
