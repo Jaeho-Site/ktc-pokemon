@@ -1,13 +1,34 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { usePokemon } from "../contexts/PokemonContext";
+import { useSelector, useDispatch } from 'react-redux';
+import { addPokemon, removePokemon } from '../redux/slices/pokemonSlice';
 
 const PokemonCard = ({ pokemon, isInDashboard }) => {
     const navigate = useNavigate();
-    const { addPokemon, removePokemon } = usePokemon();
+    const dispatch = useDispatch();
+    const selected = useSelector(state => state.pokemon.selected);
     
     const handleCardClick = () => {
         navigate(`/detail?id=${pokemon.id}`);
+    };
+    
+    const handleAddPokemon = (e) => {
+        e.stopPropagation();
+        if (selected.length >= 6) {
+            alert("더 이상 선택할 수 없습니다.");
+            return;
+        }
+        if (selected.find(p => p.id === pokemon.id)) {
+            alert("이미 선택된 포켓몬입니다.");
+            return;
+        }
+        
+        dispatch(addPokemon(pokemon));
+    };
+    
+    const handleRemovePokemon = (e) => {
+        e.stopPropagation();
+        dispatch(removePokemon(pokemon));
     };
     
     return (
@@ -16,9 +37,9 @@ const PokemonCard = ({ pokemon, isInDashboard }) => {
             <h4>{pokemon.korean_name}</h4>
             <p>{pokemon.types.join(", ")}</p>
             {isInDashboard ? (
-                <button onClick={e => { e.stopPropagation(); removePokemon(pokemon); }}>제거</button>
+                <button onClick={handleRemovePokemon}>제거</button>
             ) : (
-                <button onClick={e => { e.stopPropagation(); addPokemon(pokemon); }}>추가</button>
+                <button onClick={handleAddPokemon}>추가</button>
             )}
         </Card>
     );

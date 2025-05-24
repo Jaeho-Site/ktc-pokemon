@@ -1,14 +1,15 @@
 import Dashboard from "../components/Dashboard";
 import PokemonList from "../components/PokemonList";
 import MOCK_DATA from "../db/mock";
-import { PokemonProvider } from "../contexts/PokemonContext";
+import { Provider } from 'react-redux';
+import store from '../redux/config/configStore';
 
 const Dex = () => {
     return (
-        <PokemonProvider>
+        <Provider store={store}>
             <Dashboard />
             <PokemonList pokemons={MOCK_DATA} />
-        </PokemonProvider>
+        </Provider>
     );
 };
 

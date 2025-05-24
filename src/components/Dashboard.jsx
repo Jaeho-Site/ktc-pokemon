@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import Pokeball from "../assets/pokeball.png";
 import PokemonCard from "./PokemonCard";
 import styled from "styled-components";
-import { usePokemon } from "../contexts/PokemonContext";
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    const { selected } = usePokemon();
+    const selected = useSelector(state => state.pokemon.selected);
     const slots = Array.from({ length: 6 }, (_, index) => selected[index] || null);
 
     return (
