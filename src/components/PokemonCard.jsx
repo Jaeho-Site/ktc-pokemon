@@ -1,25 +1,59 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from 'react-redux';
 import { addPokemon, removePokemon } from '../redux/slices/pokemonSlice';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '20px',
+    borderRadius: '10px',
+    maxWidth: '300px',
+    textAlign: 'center'
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  }
+};
 
 const PokemonCard = ({ pokemon, isInDashboard }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const selected = useSelector(state => state.pokemon.selected);
     
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+    
     const handleCardClick = () => {
         navigate(`/detail?id=${pokemon.id}`);
+    };
+    
+    const showModal = (message) => {
+        setModalMessage(message);
+        setModalIsOpen(true);
+    };
+    
+    const closeModal = () => {
+        setModalIsOpen(false);
     };
     
     const handleAddPokemon = (e) => {
         e.stopPropagation();
         if (selected.length >= 6) {
-            alert("더 이상 선택할 수 없습니다.");
+            showModal("더 이상 선택할 수 없습니다.");
             return;
         }
         if (selected.find(p => p.id === pokemon.id)) {
-            alert("이미 선택된 포켓몬입니다.");
+            showModal("이미 선택된 포켓몬입니다.");
             return;
         }
         
@@ -32,16 +66,27 @@ const PokemonCard = ({ pokemon, isInDashboard }) => {
     };
     
     return (
-        <Card onClick={handleCardClick} style={{ cursor: 'pointer' }}>
-            <img src={pokemon.img_url} alt={pokemon.korean_name} />
-            <h4>{pokemon.korean_name}</h4>
-            <p>{pokemon.types.join(", ")}</p>
-            {isInDashboard ? (
-                <button onClick={handleRemovePokemon}>제거</button>
-            ) : (
-                <button onClick={handleAddPokemon}>추가</button>
-            )}
-        </Card>
+        <>
+            <Card onClick={handleCardClick} style={{ cursor: 'pointer' }}>
+                <img src={pokemon.img_url} alt={pokemon.korean_name} />
+                <h4>{pokemon.korean_name}</h4>
+                <p>{pokemon.types.join(", ")}</p>
+                {isInDashboard ? (
+                    <button onClick={handleRemovePokemon}>제거</button>
+                ) : (
+                    <button onClick={handleAddPokemon}>추가</button>
+                )}
+            </Card>
+            
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+            >
+                <p>{modalMessage}</p>
+                <button onClick={closeModal}>확인</button>
+            </Modal>
+        </>
     );
 };
 
